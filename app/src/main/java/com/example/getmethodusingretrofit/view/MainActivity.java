@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -45,20 +46,19 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading");
 
         initView();
-
         getData();
         Logger.d("onCreate");
     }
 
     private void getData() {
         viewModel.movieLiveData.observe(this, new Observer<DataResource<List<Model>>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(DataResource<List<Model>> modelDataResource) {
                 switch (modelDataResource.getStatus()) {
                     case SUCCESS:
-                        //Logger.d(modelDataResource.getActualData().get(1).getName());
 
-                        modelList.addAll(modelDataResource.getActualData());
+                        adapter.setModels(modelDataResource.getActualData());
                         binding.RecyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                         progressDialog.dismiss();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         binding.RecyclerView.setHasFixedSize(true);
         binding.RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         modelList = new ArrayList<>();
-        adapter = new MovieAdapter(this, modelList);
+        adapter = new MovieAdapter(this);
         Logger.d("initView");
 
     }

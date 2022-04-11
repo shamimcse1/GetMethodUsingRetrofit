@@ -48,7 +48,6 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<List<Model>> call, Throwable t) {
-                 Logger.d("");
 
             }
         });

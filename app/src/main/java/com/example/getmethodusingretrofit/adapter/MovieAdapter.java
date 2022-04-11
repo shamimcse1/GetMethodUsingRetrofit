@@ -20,15 +20,16 @@ import com.example.getmethodusingretrofit.helpers.Constant;
 import com.example.getmethodusingretrofit.model.Model;
 import com.example.getmethodusingretrofit.view.DetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
+public  class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     private Context context;
-    private List<Model> models;
+    private List<Model> models = new ArrayList<>();
 
-    public MovieAdapter(Context context, List<Model> models) {
+    public MovieAdapter(Context context) {
         this.context = context;
-        this.models = models;
+       // this.models = models;
     }
 
     @NonNull
@@ -59,6 +60,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
                 context.startActivity(intent);
             }
         });
+    }
+
+    public void setModels(List<Model> models){
+        models.clear();
+        models.size();
+        notifyDataSetChanged();
     }
 
     @Override

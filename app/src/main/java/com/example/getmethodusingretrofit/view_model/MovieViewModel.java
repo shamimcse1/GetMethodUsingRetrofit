@@ -14,8 +14,7 @@ import java.util.List;
 public class MovieViewModel extends ViewModel {
 
     MovieRepository repository = new MovieRepository();
-   public LiveData<DataResource<List<Model>>> movieLiveData = repository.movieLiveData;
-
+    public LiveData<DataResource<List<Model>>> movieLiveData = repository.movieLiveData;
 
     public void loadMovieList() {
         repository.getMovieList();
